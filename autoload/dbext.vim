@@ -3798,8 +3798,11 @@ function! s:DB_PGSQL_getListColumn(table_name)
     let owner      = s:DB_getObjectOwner(a:table_name)
     let table_name = s:DB_getObjectName(a:table_name)
     let query =   "SELECT a.attname                   " .
-                \ "  FROM pg_class c, pg_attribute a, " .
-                \ "       pg_namepace n               " .
+                \ "  FROM pg_class c " .
+                \ "INNER JOIN pg_attribute a " .
+                \ "ON c.oid = a.attrelid " .
+                \ "INNER JOIN pg_namepace n " .
+                \ "ON n.oid = c.relnamespace " .
                 \ " WHERE c.oid = a.attrelid          " .
                 \ "   AND a.attnum > 0                " .
                 \ "   AND c.relname = '" . table_name . "'"
