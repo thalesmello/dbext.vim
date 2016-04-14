@@ -3801,7 +3801,7 @@ function! s:DB_PGSQL_getListColumn(table_name)
                 \ "  FROM pg_class c " .
                 \ "INNER JOIN pg_attribute a " .
                 \ "ON c.oid = a.attrelid " .
-                \ "INNER JOIN pg_namepace n " .
+                \ "INNER JOIN pg_namespace n " .
                 \ "ON n.oid = c.relnamespace " .
                 \ " WHERE c.oid = a.attrelid          " .
                 \ "   AND a.attnum > 0                " .
