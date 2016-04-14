@@ -5929,7 +5929,7 @@ function! dbext#DB_getSqlWithDefault(...)
             let sql = sql . a:2
         endif
     else
-        let sql = sql . expand("<cword>")
+        let sql = sql . expand("<cWORD>")
     endif
 
     return sql
@@ -6009,7 +6009,7 @@ function! dbext#DB_execSqlWithDefault(...)
             let sql = sql . a:2
         endif
     else
-        let sql = sql . expand("<cword>")
+        let sql = sql . expand("<cWORD>")
     endif
 
     return dbext#DB_execSql(sql)
@@ -6163,7 +6163,7 @@ function! dbext#DB_describeTable(...)
     if(a:0 > 0)
         let table_name = s:DB_getObjectAndQuote(a:1)
     else
-        let table_name = expand("<cword>")
+        let table_name = expand("<cWORD>")
     endif
     if table_name == ""
         call s:DB_warningMsg( 'dbext:You must supply a table name' )
@@ -6177,7 +6177,7 @@ function! dbext#DB_describeProcedure(...)
     if(a:0 > 0)
         let procedure_name = s:DB_getObjectAndQuote(a:1)
     else
-        let procedure_name = expand("<cword>")
+        let procedure_name = expand("<cWORD>")
     endif
     if procedure_name == ""
         call s:DB_warningMsg( 'dbext:You must supply a procedure name' )

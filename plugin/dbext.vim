@@ -130,7 +130,7 @@ endif
 if !exists(':DBSelectFromTableWithWhere')
     command! -nargs=0 DBSelectFromTableWithWhere
                 \ :call dbext#DB_execSql("select * from " .
-                \ expand("<cword>") . " where " .
+                \ expand("<cWORD>") . " where " .
                 \ input("Please enter where clause: "))
     nmap <unique> <script> <Plug>DBSelectFromTableWithWhere
                 \ :DBSelectFromTableWithWhere<CR>
@@ -477,7 +477,7 @@ function! DB_getListColumn(...)
         " Strip any leading or trailing spaces
         let table_name = substitute(a:1, '\s*\(.\+\)\s*', '\1', '')
     else
-        let table_name = expand("<cword>")
+        let table_name = expand("<cWORD>")
     endif
 
     if(a:0 > 1)
