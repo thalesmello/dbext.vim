@@ -3797,15 +3797,16 @@ endfunction
 function! s:DB_PGSQL_getListColumn(table_name)
     let owner      = s:DB_getObjectOwner(a:table_name)
     let table_name = s:DB_getObjectName(a:table_name)
-    let query =   "SELECT a.attname                  " .
-                \ "  FROM pg_class c, pg_attribute a " .
-                \ " WHERE c.oid = a.attrelid         " .
-                \ "   AND a.attnum > 0               " .
+    let query =   "SELECT a.attname                   " .
+                \ "  FROM pg_class c, pg_attribute a, " .
+                \ "       pg_namepace n               " .
+                \ " WHERE c.oid = a.attrelid          " .
+                \ "   AND a.attnum > 0                " .
                 \ "   AND c.relname = '" . table_name . "'"
 
     if strlen(owner) > 0
         let query = query .
-                    \ "   AND pg_get_userbyid(c.relowner) = '".owner."' "
+                    \ "   AND n.nspname = '".owner."' "
     endif
     let query = query .
                 \ " ORDER BY a.attnum;            "
